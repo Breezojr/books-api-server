@@ -32,7 +32,7 @@ export class UsersService {
         return res
     }
 
-    async getUser(query: object): Promise<User> {
+    async getUser(query: object): Promise<any> {
         return this.userModel.findOne(query);
     }
 }
