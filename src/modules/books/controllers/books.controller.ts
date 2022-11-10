@@ -16,9 +16,9 @@ export class BooksController {
         return this.bookService.getAllBooks();
     }
 
-    @Get(':title')
-    async getBook(@Param('title') title: string): Promise<Book> {
-        return this.bookService.getBook({"title": title});
+    @Get(':id')
+    async getBook(@Param('id') id: string): Promise<Book> {
+        return this.bookService.getBook({"_id": id});
     }
 
 
@@ -31,26 +31,31 @@ export class BooksController {
         return this.bookService.addBook(request, createBook);
     }
 
-    @Put('/edit/:title')
+    @UseGuards(JwtAuthGuard)
+    @Put('/edit/:id')
     async editBook(
         @Req() request: Request,
-        @Param('title') title: string,
+        @Param('id') id: string,
         @Body() editBook: EditBookRequestDto,
     ): Promise<string> {
-        return this.bookService.editBook({"title": title}, editBook, request);
+        return this.bookService.editBook({"_id": id}, editBook, request);
     }   
 
-    @Delete('/delete/:title')
+    @UseGuards(JwtAuthGuard)
+    @Delete('/delete/:id')
     async deleteBook(
-        @Param('title') title: string,
+        @Req() request: Request,
+        @Param('id') id: string,
     ): Promise<string> {
-        return this.bookService.deleteBook({"title": title});
-    }   
-
-    @Get('/deactivate/:title')
+        return this.bookService.deleteBook({"_id": id}, request);
+    }  
+    
+    @UseGuards(JwtAuthGuard)
+    @Get('/deactivate/:id')
     async deactivateBook(
-        @Param('title') title: string,
+        @Req() request: Request,
+        @Param('id') id: string,
     ): Promise<string> {
-        return this.bookService.deactivateBook({"title": title});
+        return this.bookService.deactivateBook({"_id": id}, request);
     }  
 }
