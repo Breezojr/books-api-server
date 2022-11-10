@@ -8,8 +8,6 @@ import { UserModule } from "../user/user.module";
 import { UsersService } from "../user/providers/users.service";
 import { UserSchema } from "../user/schemas/user.model";
 import { JwtStrategy } from "./providers/jwt.stratergy";
-import { LocalStrategy } from "./providers/local.stratergy";
-
 
 @Module({
     imports: [
@@ -25,7 +23,6 @@ import { LocalStrategy } from "./providers/local.stratergy";
     providers: [
         AuthService,
         UsersService,
-        LocalStrategy,
         JwtStrategy
     ],
     controllers: [

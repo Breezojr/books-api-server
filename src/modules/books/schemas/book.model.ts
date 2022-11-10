@@ -3,7 +3,6 @@ import mongoose, { Document } from 'mongoose';
 import { User } from 'src/modules/user/schemas/user.model';
 
 export type BookDocument = Book & Document;
-
 @Schema()
 export class Book {
   @Prop()

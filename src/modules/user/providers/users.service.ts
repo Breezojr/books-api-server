@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
-import { User, UserDocument } from '../schemas/user.model';
+import { UserDocument } from '../schemas/user.model';
 import { CreateUser } from '../dtos/user.request.dto';
 import { UserResponseDto } from '../dtos/user.response';
 

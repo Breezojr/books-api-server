@@ -21,7 +21,6 @@ export class BooksController {
         return this.bookService.getBook({"_id": id});
     }
 
-
     @UseGuards(JwtAuthGuard)
     @Post('/add')
     async addBook(

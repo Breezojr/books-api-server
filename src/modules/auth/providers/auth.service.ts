@@ -1,16 +1,19 @@
-import {  HttpException, HttpStatus,Injectable, Logger, NotAcceptableException } from '@nestjs/common';
+import {  
+    HttpException, 
+    HttpStatus,
+    Injectable, 
+    Logger, 
+    NotAcceptableException 
+} from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../../user/providers/users.service';
 import { LoginRequestDto } from '../dtos/login.request';
-
 @Injectable()
 export class AuthService {
     constructor(
         private readonly usersService: UsersService, 
         private jwtService: JwtService) { }
-
-        logger = new Logger(AuthService.name)
 
     async validateUser(username: string, password: string): Promise<any> {
         const user = await this.usersService.getUser({ username });
