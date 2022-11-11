@@ -6,6 +6,7 @@
 
 ## Installation
  To run this application you must have npm installed in your machine
+ Then you must install all required packages
 
 ```bash
 $ npm install
