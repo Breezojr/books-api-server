@@ -21,8 +21,7 @@ export class BooksService {
 
     async getAllBooks(): Promise<Book[]> {
         const books = await this.bookModel.find()
-        const publicBooks = books.filter(book => book.isPublic)
-        return publicBooks
+        return books
     }
 
     async addBook(req, body: BookRequestDto): Promise<BookResponseDto> {
@@ -63,6 +62,10 @@ export class BooksService {
             throw new HttpException('You cant edit this book', HttpStatus.NOT_ACCEPTABLE)
         }
 
+      if (!body.author || !body.title ) {
+        throw new HttpException('Provide data to edit', HttpStatus.BAD_REQUEST)
+      }
+
         const updatedBook = await this.bookModel.findOneAndUpdate(query, body)
         const res = new BookResponseDto()
         res.status = "200"
@@ -91,7 +94,7 @@ export class BooksService {
         return resp
     }
 
-    async deactivateBook(query: QueryDTo, req): Promise<string> {
+    async deactivateBook(query: QueryDTo, req){
         const userEmail = req.user.username
 
         const book = await this.bookModel.findOne(query);
@@ -105,6 +108,12 @@ export class BooksService {
         }
 
         const updatedBook = await this.bookModel.findOneAndUpdate(query, { "isPublic": !book.isPublic })
-        return `Book ${book.title} status was changed succesfully`
+
+        const resp = {
+            isPublic:updatedBook.isPublic,
+            status: '200'
+        }
+
+        return resp
     }
 }

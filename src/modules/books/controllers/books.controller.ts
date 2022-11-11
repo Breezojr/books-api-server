@@ -54,7 +54,7 @@ export class BooksController {
     async deactivateBook(
         @Req() request: Request,
         @Param('id') id: string,
-    ): Promise<string> {
+    ){
         return this.bookService.deactivateBook({"_id": id}, request);
     }  
 }

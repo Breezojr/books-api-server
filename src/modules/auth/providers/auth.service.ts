@@ -34,7 +34,6 @@ export class AuthService {
             return {
                 message: 'Email not found',
                 status: '400'
-                
             } 
         }
         
@@ -45,7 +44,12 @@ export class AuthService {
 
         if (user && passwordValid) {
             const payload = { username: body.email};
-            const access_token = this.jwtService.sign(payload)
+            const access_token = this.jwtService.sign(
+                payload,
+                {
+                    expiresIn: '1d'
+                }
+                )
 
             const response = new LoginResponseDto
             response.status = '200'
