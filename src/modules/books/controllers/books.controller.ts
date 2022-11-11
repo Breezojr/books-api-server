@@ -36,7 +36,7 @@ export class BooksController {
         @Req() request: Request,
         @Param('id') id: string,
         @Body() editBook: EditBookRequestDto,
-    ): Promise<string> {
+    ) : Promise<BookResponseDto> {
         return this.bookService.editBook({"_id": id}, editBook, request);
     }   
 
@@ -45,7 +45,7 @@ export class BooksController {
     async deleteBook(
         @Req() request: Request,
         @Param('id') id: string,
-    ): Promise<string> {
+    ){
         return this.bookService.deleteBook({"_id": id}, request);
     }  
     

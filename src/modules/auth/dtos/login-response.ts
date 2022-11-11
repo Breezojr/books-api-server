@@ -5,4 +5,5 @@ export class LoginResponseDto{
     firstName: string;
     lastName: string;
     access_token: string
+    status: string
 }

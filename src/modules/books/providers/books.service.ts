@@ -37,7 +37,8 @@ export class BooksService {
             })
 
         const res = new BookResponseDto()
-        res.title = `Book titled ${book.title} added successfully`
+        res.status = "200"
+        res.message = `Book titled ${book.title} added successfully`
         return res
     }
 
@@ -49,7 +50,7 @@ export class BooksService {
         return book
     }
 
-    async editBook(query: QueryDTo, body: EditBookRequestDto, req): Promise<string> {
+    async editBook(query: QueryDTo, body: EditBookRequestDto, req): Promise<BookResponseDto> {
         const userEmail = req.user.username
 
         const book = await this.bookModel.findOne(query);
@@ -63,10 +64,12 @@ export class BooksService {
         }
 
         const updatedBook = await this.bookModel.findOneAndUpdate(query, body)
-        return `Book ${book.title} was updated succesfully`
-    }
+        const res = new BookResponseDto()
+        res.status = "200"
+        res.message = `Book titled ${book.title} edited successfully`
+        return res    }
 
-    async deleteBook(query: QueryDTo, req): Promise<string> {
+    async deleteBook(query: QueryDTo, req){
         const userEmail = req.user.username
 
         const book = await this.bookModel.findOne(query);
@@ -80,7 +83,12 @@ export class BooksService {
         }
 
         const updatedBook = await this.bookModel.findOneAndDelete(query)
-        return `Book ${book.title} was deleted succesfully`
+
+        const resp = {
+            message: `Book ${book.title} was deleted succesfully`,
+            status:  '200'
+        }
+        return resp
     }
 
     async deactivateBook(query: QueryDTo, req): Promise<string> {

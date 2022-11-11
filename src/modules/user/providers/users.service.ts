@@ -28,6 +28,7 @@ export class UsersService {
             })
 
         const res = new UserResponseDto()
+        res.status = '200'
         res.name  = `${createUser.firstName} ${createUser.lastName}`
         return res
     }

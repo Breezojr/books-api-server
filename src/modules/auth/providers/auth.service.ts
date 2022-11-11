@@ -31,7 +31,11 @@ export class AuthService {
     async login(body: LoginRequestDto) {
         const user = await this.usersService.getUser({ email: body.email});
         if (!user) {
-            throw new NotAcceptableException('wrong email');
+            return {
+                message: 'Email not found',
+                status: '400'
+                
+            } 
         }
         
         const passwordValid = await bcrypt.compare(body.password, user.password)
@@ -44,6 +48,7 @@ export class AuthService {
             const access_token = this.jwtService.sign(payload)
 
             const response = new LoginResponseDto
+            response.status = '200'
             response.id = user._id
             response.email = user.email;
             response.firstName = user.firstName;

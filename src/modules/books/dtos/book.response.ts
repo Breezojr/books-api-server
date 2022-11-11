@@ -1,3 +1,4 @@
 export class BookResponseDto {
-    title: string
+    message: string
+    status: string
 }
