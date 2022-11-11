@@ -16,19 +16,17 @@ $ npm install
  copy .env
  add connection string
  
+To generated compiled files
+
 ```bash
 $ run npm run build
 ```
- To generated compiled files
- 
+ To start an app in development mode
+
  ```bash
 $ run npm run start
 ```
-To start an app
-
-```bash
-# development
-$ npm run start
+To start an app and compile on fly
 
 # watch mode
 $ npm run start:dev
